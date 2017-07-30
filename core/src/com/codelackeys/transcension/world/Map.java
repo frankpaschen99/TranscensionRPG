@@ -1,24 +1,39 @@
 package com.codelackeys.transcension.world;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
-import com.codelackeys.transcension.utils.Constants;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 public class Map {
-	private Texture texture;
-	private Cell[][] tiles = new Cell[60][60];
+	private TiledMap map;
+	private OrthogonalTiledMapRenderer renderer;
+	private TiledMapTileLayer collisionObjectLayer;
+	private MapObjects objects;
+	private Batch batch;
+	private static OrthographicCamera camera;
+	private float unitScale = 1 / 32f;
 	
-	public Map() {
-		
+	public Map(String json) {
+		map = new TmxMapLoader().load(json.split(".")[1] == "json" ? getTmxFromJSON(json) : json);
+		renderer = new OrthogonalTiledMapRenderer(map, unitScale);
+		batch = renderer.getBatch();
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false, 30, 20);
 	}
-	public void draw() {
-		
+	private String getTmxFromJSON(String json) {
+		return "do this";
 	}
-	public Cell getTile(Vector2 c) {
-		return tiles[(int) c.x][(int) c.y];
+	public void render() {
+		renderer.setView(camera);
+		renderer.render();
 	}
-	public int[] getTileFromPos(Vector2 pos) {
-		// somehow i wrote this
-		return new int[]{(int) (Math.floor(pos.x / Constants.CELL_SIZE)), (int) (Math.floor(pos.y / Constants.CELL_SIZE))};
+	public void dispose() {
+		map.dispose();
+		renderer.dispose();
+		batch.dispose();
 	}
 }
