@@ -12,12 +12,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.codelackeys.transcension.CoreGame;
+import com.codelackeys.transcension.debug.DeveloperHud;
 
 public class GameScreen implements Screen, InputProcessor {
-
+	
 	SpriteBatch batch;
 	Sprite world;
-	OrthographicCamera camera;
+	public OrthographicCamera camera;
 	int WORLD_HEIGHT = 240;
 	int WORLD_WIDTH = 320;
 	
@@ -35,6 +36,7 @@ public class GameScreen implements Screen, InputProcessor {
 		viewport.apply();
 		
 		Gdx.input.setInputProcessor(this);
+	
 	}
 	
 	@Override
@@ -50,10 +52,13 @@ public class GameScreen implements Screen, InputProcessor {
 		batch.setProjectionMatrix(camera.combined);
 		
 		world.draw(batch);
+		DeveloperHud.draw(batch, this);
 		
 		batch.end();
 		
 		camera.update();
+		
+		
 	}
 	@Override
 	public void resize(int width, int height) {
