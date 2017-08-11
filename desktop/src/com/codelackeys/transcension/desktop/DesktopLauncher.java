@@ -8,6 +8,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new CoreGame(), config);
+		// Actual screen dimensions
 		config.width = 800;
 		config.height = 600;
 		config.resizable = true;

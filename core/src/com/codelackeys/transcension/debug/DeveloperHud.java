@@ -22,11 +22,16 @@ public final class DeveloperHud {
 		font12 = generator.generateFont(parameter); // font size 12 pixels
 		font12.setColor(Color.BLACK);
 		generator.dispose(); // don't forget to dispose to avoid memory leaks!
+		// pixel perfect ortho cam for text rendering
 		devCam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		devCam.translate(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		devCam.setToOrtho(false);	// center the camera
+		devCam.update();
 	}
-	
+	public static void setColor(Color color) {
+		font12.setColor(color);
+	}
 	public static void draw(SpriteBatch batch, GameScreen debugScreen) {
+		// lol this is ugly - use a StringBuilder in the future
 		CharSequence hudString = "FPS: " + Gdx.graphics.getFramesPerSecond() 
 		+ " | " 
 		+ "ScrPos: (" 
@@ -38,9 +43,14 @@ public final class DeveloperHud {
 		+ debugScreen.camera.position.x 
 		+ ", "
 		+ debugScreen.camera.position.y
+		+ ") | "
+		+ "MousePos: ("
+		+ Gdx.input.getX()
+		+ ", " 
+		+ Gdx.input.getY()
 		+ ")";
 		batch.setProjectionMatrix(devCam.combined);
-		font12.draw(batch, hudString, 0, Gdx.graphics.getHeight() - font12.getCapHeight());
+		font12.draw(batch, hudString, 0, devCam.viewportHeight - font12.getCapHeight());
 		devCam.update();
 	}
 }
