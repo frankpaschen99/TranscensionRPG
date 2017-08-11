@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.codelackeys.transcension.maputils.World;
-import com.codelackeys.transcension.screens.GameScreen;
 
 public final class DeveloperHud {
 	
@@ -33,9 +32,6 @@ public final class DeveloperHud {
 	}
 	public static void toggle() {
 		enabled = !enabled;
-	}
-	public static void setColor(Color color) {
-		font12.setColor(color);
 	}
 	public static void draw(SpriteBatch batch, OrthographicCamera camera) {
 		
