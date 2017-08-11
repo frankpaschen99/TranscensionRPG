@@ -19,7 +19,7 @@ public final class DeveloperHud {
 	static {
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("consola.ttf"));
 		parameter = new FreeTypeFontParameter();
-		parameter.size = 14;
+		parameter.size = 16;
 		font12 = generator.generateFont(parameter); // font size 12 pixels
 		font12.setColor(Color.BLACK);
 		generator.dispose();
