@@ -1,73 +1,130 @@
 package com.codelackeys.transcension.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.codelackeys.transcension.utils.Constants;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.codelackeys.transcension.CoreGame;
 
-public class GameScreen implements Screen {
-	
+public class GameScreen implements Screen, InputProcessor {
+
 	SpriteBatch batch;
-	Sprite sprite;
+	Sprite world;
 	OrthographicCamera camera;
+	int WORLD_HEIGHT = 240;
+	int WORLD_WIDTH = 320;
+	
+	Viewport viewport;
+	
+	public GameScreen(CoreGame game) {
+		batch = new SpriteBatch();
+		
+		world = new Sprite(new Texture(Gdx.files.internal("level.png")));
+		world.setSize(WORLD_WIDTH, WORLD_HEIGHT);
+		
+		camera = new OrthographicCamera();
+		
+		viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
+		viewport.apply();
+		
+		Gdx.input.setInputProcessor(this);
+	}
 	
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-		batch = new SpriteBatch();
-		sprite = new Sprite(new Texture(Gdx.files.internal("vetfinal.png")));
-		camera = new OrthographicCamera(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
-		camera.translate(camera.viewportWidth / 2, camera.viewportHeight / 2);
+		
 	}
-
 	@Override
 	public void render(float delta) {
-		// TODO Auto-generated method stub
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(0,  0,  0,  1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		camera.update();
 		
 		batch.begin();
 		batch.setProjectionMatrix(camera.combined);
 		
-		batch.draw(sprite, 0, 0);
+		world.draw(batch);
 		
 		batch.end();
+		
+		camera.update();
 	}
-
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
+		viewport.update(width, height);
+		camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
 	}
-
 	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void pause() {}
 	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void resume() {}
 	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void hide() {}
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		world.getTexture().dispose();
 	}
 
+	@Override
+	public boolean keyDown(int keycode) {
+		// TODO Auto-generated method stub
+		if (keycode == Keys.LEFT)
+			camera.translate(-1f, 0);
+		if (keycode == Keys.RIGHT)
+			camera.translate(1f, 0);
+		if (keycode == Keys.UP)
+			camera.translate(0, 1f);
+		if (keycode == Keys.DOWN)
+			camera.translate(0, -1f);
+		
+		return false;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean keyTyped(char character) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean scrolled(int amount) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
