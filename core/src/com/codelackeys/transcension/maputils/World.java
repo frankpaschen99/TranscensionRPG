@@ -17,6 +17,10 @@ public final class World {
 		renderer.setMap(currentMap);
 		mapName = mapFile;
 	}
+	public static void stop() {
+		if (renderer.getMap() != null)
+			renderer.getMap().dispose();
+	}
 	public static void render(OrthographicCamera camera) {
 		renderer.setView(camera);
 		renderer.render();
