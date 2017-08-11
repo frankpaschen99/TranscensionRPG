@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.codelackeys.transcension.CoreGame;
 import com.codelackeys.transcension.debug.DeveloperHud;
 import com.codelackeys.transcension.utils.Constants;
+import com.codelackeys.transcension.maputils.World;
 
 public class GameScreen implements Screen, InputProcessor {
 	
@@ -26,19 +27,16 @@ public class GameScreen implements Screen, InputProcessor {
 	public OrthographicCamera camera;
 	Viewport viewport;
 	
-	/* TILED MAP */
-	TiledMap map = new TmxMapLoader().load("desert/desert.tmx");
-	OrthogonalTiledMapRenderer renderer = new OrthogonalTiledMapRenderer(map, 1);
-
-	
 	public GameScreen(CoreGame game) {
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 		viewport = new FitViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT, camera);
 		viewport.apply();
+
+		// load the desert tmx
+		World.setMap("desert/desert.tmx");
 		
 		Gdx.input.setInputProcessor(this);
-	
 	}
 	
 	@Override
@@ -50,9 +48,8 @@ public class GameScreen implements Screen, InputProcessor {
 		Gdx.gl.glClearColor(0,  0,  0,  1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		// Tiled Renderer
-		renderer.setView(camera);
-		renderer.render();
+		// Render the current map
+		World.render(camera);
 		
 		batch.begin();
 		batch.setProjectionMatrix(camera.combined);
@@ -77,9 +74,7 @@ public class GameScreen implements Screen, InputProcessor {
 	@Override
 	public void hide() {}
 	@Override
-	public void dispose() {
-		map.dispose();
-	}
+	public void dispose() {}
 
 	@Override
 	public boolean keyDown(int keycode) {
