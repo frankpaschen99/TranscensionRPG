@@ -34,7 +34,6 @@ public class GameScreen implements Screen, InputProcessor {
 	public GameScreen(CoreGame game) {
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
-
 		viewport = new FitViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT, camera);
 		viewport.apply();
 		
