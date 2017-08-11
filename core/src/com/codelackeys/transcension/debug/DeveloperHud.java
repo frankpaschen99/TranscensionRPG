@@ -31,11 +31,11 @@ public final class DeveloperHud {
 	public static void setColor(Color color) {
 		font12.setColor(color);
 	}
-	public static void draw(SpriteBatch batch, GameScreen debugScreen) {
+	public static void draw(SpriteBatch batch, OrthographicCamera camera) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("FPS: " + Gdx.graphics.getFramesPerSecond() + " | ");
 		sb.append("ScrPos: (" + Gdx.graphics.getWidth() + ", " + Gdx.graphics.getHeight() + ") | ");
-		sb.append("CamPos: (" + debugScreen.camera.position.x + ", " + debugScreen.camera.position.y + ") | ");
+		sb.append("CamPos: (" + camera.position.x + ", " + camera.position.y + ") | ");
 		sb.append("MousePos: (" + Gdx.input.getX() + ", " + Gdx.input.getY() + ") |\n");
 		sb.append("CurMap: " + World.getMapName() + " | ");
 		

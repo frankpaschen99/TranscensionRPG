@@ -17,9 +17,9 @@ import com.codelackeys.transcension.maputils.World;
 public class GameScreen implements Screen, InputProcessor {
 	
 	/* Rendering / Camera */
-	SpriteBatch batch;
-	public OrthographicCamera camera;
-	Viewport viewport;
+	private SpriteBatch batch;
+	private OrthographicCamera camera;
+	private Viewport viewport;
 	
 	public GameScreen(CoreGame game) {
 		batch = new SpriteBatch();
@@ -50,7 +50,7 @@ public class GameScreen implements Screen, InputProcessor {
 		batch.setProjectionMatrix(camera.combined);
 		
 		// Developer HUD
-		DeveloperHud.draw(batch, this);
+		DeveloperHud.draw(batch, camera);
 		
 		batch.end();
 		
