@@ -82,6 +82,9 @@ public class GameScreen implements Screen, InputProcessor {
 		if (keycode == Keys.DOWN)
 			camera.translate(0, -32f);
 		
+		if (keycode == Keys.F)
+			DeveloperHud.toggle();
+		
 		return false;
 	}
 

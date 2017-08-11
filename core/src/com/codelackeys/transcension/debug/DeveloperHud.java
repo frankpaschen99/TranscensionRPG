@@ -16,27 +16,36 @@ public final class DeveloperHud {
 	private static FreeTypeFontParameter parameter;
 	private static BitmapFont font12;
 	private static OrthographicCamera devCam;
+	private static boolean enabled = true;
 	static {
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("consola.ttf"));
 		parameter = new FreeTypeFontParameter();
 		parameter.size = 16;
+		parameter.borderWidth = 2;
+		parameter.borderColor = Color.BLACK;
 		font12 = generator.generateFont(parameter); // font size 12 pixels
-		font12.setColor(Color.BLACK);
+		font12.setColor(Color.YELLOW);
 		generator.dispose();
 		// pixel perfect ortho cam for text rendering
 		devCam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		devCam.setToOrtho(false);	// center the camera
 		devCam.update();
 	}
+	public static void toggle() {
+		enabled = !enabled;
+	}
 	public static void setColor(Color color) {
 		font12.setColor(color);
 	}
 	public static void draw(SpriteBatch batch, OrthographicCamera camera) {
+		
+		if (!enabled) return;
+		
 		StringBuilder sb = new StringBuilder();
 		sb.append("FPS: " + Gdx.graphics.getFramesPerSecond() + " | ");
 		sb.append("ScrPos: (" + Gdx.graphics.getWidth() + ", " + Gdx.graphics.getHeight() + ") | ");
-		sb.append("CamPos: (" + camera.position.x + ", " + camera.position.y + ") | ");
-		sb.append("MousePos: (" + Gdx.input.getX() + ", " + Gdx.input.getY() + ") |\n");
+		sb.append("CamPos: (" + camera.position.x + ", " + camera.position.y + ") | \n");
+		sb.append("MousePos: (" + Gdx.input.getX() + ", " + Gdx.input.getY() + ") | ");
 		sb.append("CurMap: " + World.getMapName() + " | ");
 		
 		batch.setProjectionMatrix(devCam.combined);
