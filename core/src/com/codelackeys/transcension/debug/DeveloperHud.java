@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.codelackeys.transcension.maputils.World;
 import com.codelackeys.transcension.screens.GameScreen;
 
 public final class DeveloperHud {
@@ -18,7 +19,7 @@ public final class DeveloperHud {
 	static {
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("consola.ttf"));
 		parameter = new FreeTypeFontParameter();
-		parameter.size = 12;
+		parameter.size = 14;
 		font12 = generator.generateFont(parameter); // font size 12 pixels
 		font12.setColor(Color.BLACK);
 		generator.dispose(); // don't forget to dispose to avoid memory leaks!
@@ -48,7 +49,9 @@ public final class DeveloperHud {
 		+ Gdx.input.getX()
 		+ ", " 
 		+ Gdx.input.getY()
-		+ ")";
+		+ ") | \n"
+		+ "CurMap:"
+		+ World.getMapName();
 		batch.setProjectionMatrix(devCam.combined);
 		font12.draw(batch, hudString, 0, devCam.viewportHeight - font12.getCapHeight());
 		devCam.update();

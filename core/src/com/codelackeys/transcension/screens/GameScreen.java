@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.codelackeys.transcension.CoreGame;
@@ -30,6 +31,7 @@ public class GameScreen implements Screen, InputProcessor {
 	public GameScreen(CoreGame game) {
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
+		camera.position.set(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 2, 0);
 		viewport = new FitViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT, camera);
 		viewport.apply();
 
@@ -65,7 +67,6 @@ public class GameScreen implements Screen, InputProcessor {
 	@Override
 	public void resize(int width, int height) {
 		viewport.update(width, height);
-		camera.position.set(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 2, 0);
 	}
 	@Override
 	public void pause() {}
@@ -80,13 +81,13 @@ public class GameScreen implements Screen, InputProcessor {
 	public boolean keyDown(int keycode) {
 		// TODO: remove this shit
 		if (keycode == Keys.LEFT)
-			camera.translate(-1f, 0);
+			camera.translate(-32f, 0);
 		if (keycode == Keys.RIGHT)
-			camera.translate(1f, 0);
+			camera.translate(32f, 0);
 		if (keycode == Keys.UP)
-			camera.translate(0, 1f);
+			camera.translate(0, 32f);
 		if (keycode == Keys.DOWN)
-			camera.translate(0, -1f);
+			camera.translate(0, -32f);
 		
 		return false;
 	}
