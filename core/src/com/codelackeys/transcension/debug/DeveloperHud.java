@@ -22,7 +22,7 @@ public final class DeveloperHud {
 		parameter.size = 14;
 		font12 = generator.generateFont(parameter); // font size 12 pixels
 		font12.setColor(Color.BLACK);
-		generator.dispose(); // don't forget to dispose to avoid memory leaks!
+		generator.dispose();
 		// pixel perfect ortho cam for text rendering
 		devCam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		devCam.setToOrtho(false);	// center the camera
