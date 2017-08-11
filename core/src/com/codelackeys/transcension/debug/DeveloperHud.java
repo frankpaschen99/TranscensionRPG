@@ -32,28 +32,14 @@ public final class DeveloperHud {
 		font12.setColor(color);
 	}
 	public static void draw(SpriteBatch batch, GameScreen debugScreen) {
-		// lol this is ugly - use a StringBuilder in the future
-		CharSequence hudString = "FPS: " + Gdx.graphics.getFramesPerSecond() 
-		+ " | " 
-		+ "ScrPos: (" 
-		+ Gdx.graphics.getWidth() 
-		+ ", " 
-		+ Gdx.graphics.getHeight()
-		+ ") | "
-		+ "CamPos: ("
-		+ debugScreen.camera.position.x 
-		+ ", "
-		+ debugScreen.camera.position.y
-		+ ") | "
-		+ "MousePos: ("
-		+ Gdx.input.getX()
-		+ ", " 
-		+ Gdx.input.getY()
-		+ ") | \n"
-		+ "CurMap:"
-		+ World.getMapName();
+		StringBuilder sb = new StringBuilder();
+		sb.append("FPS: " + Gdx.graphics.getFramesPerSecond() + " | ");
+		sb.append("ScrPos: (" + Gdx.graphics.getWidth() + ", " + Gdx.graphics.getHeight() + ") | ");
+		sb.append("CamPos: (" + debugScreen.camera.position.x + ", " + debugScreen.camera.position.y + ") | ");
+		sb.append("MousePos: (" + Gdx.input.getX() + ", " + Gdx.input.getY() + ") |\n");
+		sb.append("CurMap: " + World.getMapName() + " | ");
+		
 		batch.setProjectionMatrix(devCam.combined);
-		font12.draw(batch, hudString, 0, devCam.viewportHeight - font12.getCapHeight());
-		devCam.update();
+		font12.draw(batch, sb, 0, devCam.viewportHeight - font12.getCapHeight());
 	}
 }
