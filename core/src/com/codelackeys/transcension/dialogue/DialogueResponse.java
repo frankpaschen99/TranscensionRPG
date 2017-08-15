@@ -1,4 +1,4 @@
-package com.codelackeys.transcension.npcs;
+package com.codelackeys.transcension.dialogue;
 
 public class DialogueResponse {
 	public int jumpTo = 0;

@@ -1,0 +1,39 @@
+{
+	"speech": [
+		
+		{
+			"text":"This is the text the NPC will first say when the player interacts with them",
+			"responses": [
+				{
+					"text":"You don't scare me, robot",
+					"jumpto":1
+				},
+				{
+					"text":"Have a nice day",
+					"jumpto":1
+				},
+				{
+					"text":"oof ouch owie my bones hurt",
+					"jumpto":1
+				}
+			]
+		},
+		{
+			"text":"The NPC will say this line next. Because the jumpto was set to speech[1]",
+			"responses": [
+				{
+					"text":"frick",
+					"jumpto":4
+				},
+				{
+					"text":"nipple",
+					"jumpto":23
+				},
+				{
+					"text":"squanch",
+					"jumpto":9
+				}
+			]
+		}
+	]
+}

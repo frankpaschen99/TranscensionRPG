@@ -11,6 +11,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.codelackeys.transcension.CoreGame;
 import com.codelackeys.transcension.debug.DeveloperHud;
+import com.codelackeys.transcension.dialogue.DialogueResponse;
+import com.codelackeys.transcension.dialogue.DialogueScript;
 import com.codelackeys.transcension.utils.Constants;
 import com.codelackeys.transcension.maputils.World;
 
@@ -32,6 +34,13 @@ public class GameScreen implements Screen, InputProcessor {
 		World.setMap("desert/desert.tmx");
 		
 		Gdx.input.setInputProcessor(this);
+		
+		DialogueScript script = new DialogueScript("npc_speech.json");
+		System.out.println(script.fetchCurrentNPCText());
+		System.out.println("possible dialogue choices:");
+		for (DialogueResponse r : script.fetchPossiblePlayerResponses()) {
+			System.out.println(r.responseText);
+		}
 	}
 	
 	@Override
