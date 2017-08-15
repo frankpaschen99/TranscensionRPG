@@ -42,7 +42,12 @@ public class GameScreen implements Screen, InputProcessor {
 		for (DialogueResponse r : script.fetchPossiblePlayerResponses()) {
 			System.out.println(r.responseText);
 		}
-		
+		script.advanceDialogue(script.fetchPossiblePlayerResponses().get(0).jumpTo);
+		System.out.println(script.fetchCurrentNPCText());
+		System.out.println("possible dialogue choices:");
+		for (DialogueResponse r : script.fetchPossiblePlayerResponses()) {
+			System.out.println(r.responseText);
+		}
 	}
 	
 	@Override
