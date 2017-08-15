@@ -35,12 +35,14 @@ public class GameScreen implements Screen, InputProcessor {
 		
 		Gdx.input.setInputProcessor(this);
 		
+		/** DIALOGUE TESTING - REMOVE LATER **/
 		DialogueScript script = new DialogueScript("npc_speech.json");
 		System.out.println(script.fetchCurrentNPCText());
 		System.out.println("possible dialogue choices:");
 		for (DialogueResponse r : script.fetchPossiblePlayerResponses()) {
 			System.out.println(r.responseText);
 		}
+		
 	}
 	
 	@Override
