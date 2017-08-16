@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.badlogic.gdx.math.Vector3;
 import com.codelackeys.transcension.maputils.World;
 
 public final class DeveloperHud {
@@ -37,12 +38,15 @@ public final class DeveloperHud {
 		
 		if (!enabled) return;
 		
+		Vector3 mouseWorldCoords = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+		
 		StringBuilder sb = new StringBuilder();
 		sb.append("FPS: " + Gdx.graphics.getFramesPerSecond() + " | ");
 		sb.append("ScrPos: (" + Gdx.graphics.getWidth() + ", " + Gdx.graphics.getHeight() + ") | ");
 		sb.append("CamPos: (" + camera.position.x + ", " + camera.position.y + ") | \n");
 		sb.append("MousePos: (" + Gdx.input.getX() + ", " + Gdx.input.getY() + ") | ");
-		sb.append("CurMap: " + World.getMapName() + " | ");
+		sb.append("CurMap: " + World.getMapName() + " | \n");
+		sb.append("MWorldCoords: (" + Math.round(mouseWorldCoords.x) + ", " + Math.round(mouseWorldCoords.y) + ") | ");
 		
 		batch.setProjectionMatrix(devCam.combined);
 		font12.draw(batch, sb, 0, devCam.viewportHeight - font12.getCapHeight());
