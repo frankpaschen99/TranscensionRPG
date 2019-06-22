@@ -1,6 +1,6 @@
 # Transcension
 
-Why do people commit to projects, work their asses off for a few days, then disappear?
+we dont know what its about
 
 ##Staff
 Lead Programmer - @frankpaschen99
